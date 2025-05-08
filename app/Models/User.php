@@ -2,47 +2,43 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
+
 
 class User extends Authenticatable
 {
-    /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable;
+    use HasApiTokens;
+    protected $table = 'user'; // Твоя таблица в БД
+    protected $primaryKey = 'user_id'; // или другое имя вашего первичного ключа
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var list<string>
-     */
+    public $timestamps = false; // Если нет created_at / updated_at
+
     protected $fillable = [
-        'name',
-        'email',
+        'login',
         'password',
+        'api_token',
+        'id_role',
+        'id_personal_data'
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var list<string>
-     */
     protected $hidden = [
         'password',
-        'remember_token',
     ];
 
-    /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
-     */
-    protected function casts(): array
+    public function role()
     {
-        return [
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed',
-        ];
+        return $this->belongsTo(Role::class, 'id_role');
+    }
+
+    public function personalData()
+    {
+        return $this->belongsTo(PersonalData::class, 'id_personal_data', 'personal_data_id');
+    }
+
+    public function group()
+    {
+        return $this->hasOne(Groupa::class, 'id_user', 'user_id');
     }
 }

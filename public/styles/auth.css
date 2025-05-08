@@ -1,0 +1,17 @@
+
+.container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    h1{
+        text-align: center;
+    }
+    form{
+        display: flex;
+        flex-direction: column;
+        .submit{
+            margin: 0 auto;
+        }
+    }
+}
