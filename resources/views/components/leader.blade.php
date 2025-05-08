@@ -37,7 +37,8 @@
     <article>
         <div class="header">
             <h1 class="page-title">Главная</h1>
-            <div class="date">Сегодня, {{ date("j F Y") }}</div>
+            <?php date_default_timezone_set('Asia/Tomsk'); ?>
+            <div class="date">Сегодня, {{ date("j F Y H:i") }}</div>
         </div>
 
         <div class="card">
