@@ -37,7 +37,7 @@
     <article>
         <div class="header">
             <h1 class="page-title">Главная</h1>
-            <div class="date">Сегодня, 8 июня 2023</div>
+            <div class="date">Сегодня, {{ date("j F Y") }}</div>
         </div>
 
         <div class="card">
