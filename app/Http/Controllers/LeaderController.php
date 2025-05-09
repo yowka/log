@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Event;
+use App\Models\EventOrder;
 use App\Models\Student;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -14,8 +15,11 @@ class LeaderController
         $leaders = User::whereHas('role', function ($query) {
             $query->where('name', 'староста');
         })->with(['personalData', 'group'])->get();
-        $events = Event::take(3)->get();
-        return view('general', compact('leaders', 'events'));
+
+        $events = Event::take(5)->get();
+
+        $attendances = EventOrder::take(5)->get();
+        return view('general', compact('leaders', 'events', 'attendances'));
 
     }
 

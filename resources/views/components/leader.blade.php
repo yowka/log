@@ -28,8 +28,6 @@
                 <li><a href="#">Моя группа</a></li>
                 <li><a href="#">Мероприятия</a></li>
                 <li><a href="#">Посещаемость</a></li>
-                <li><a href="#">Сообщения</a></li>
-                <li><a href="#">Настройки</a></li>
                 <li><a href="/logout">Выход</a></li>
             </ul>
         </nav>
@@ -49,6 +47,7 @@
                     <th>Название</th>
                     <th>Дата</th>
                     <th>Место</th>
+                    <th>Описание</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -59,6 +58,7 @@
                             {{ $event->orders->date }}
                         </td>
                         <td>{{ $event->location }}</td>
+                        <td>{{ $event->description }}</td>
                     </tr>
                 @empty
                     <tr>
@@ -77,24 +77,31 @@
                 <tr>
                     <th>Студент</th>
                     <th>Мероприятие</th>
-                    <th>Дата</th>
+                    <th>Группа</th>
                     <th>Статус</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>Петров Алексей</td>
-                    <td>Организационное собрание</td>
-                    <td>1 июня 2023</td>
-                    <td class="attendance-present">Присутствовал</td>
-                </tr>
-                <tr>
-                    <td>Сидорова Мария</td>
-                    <td>Организационное собрание</td>
-                    <td>1 июня 2023</td>
-                    <td class="attendance-absent">Отсутствовал</td>
-                </tr>
-                </tbody>
+                @foreach($attendances as $attendance)
+                    <tr>
+                        <td>
+                            {{$attendance->student->personalData->surname}}
+                            {{$attendance->student->personalData->name}}
+                        </td>
+                        <td>{{ $attendance->event->title }}</td>
+                        <td>{{ $attendance->student->group->name}}</td>
+                        <td>
+                            @if($attendance->is_attended)
+                                <span class="attendance-present">Присутствовал</span>
+                            @else
+                                <span class="attendance-absent">Отсутствовал</span>
+                            @endif
+                        </td>
+                    </tr>
+
+                @endforeach
+
+                    </tbody>
             </table>
         </div>
     </article>

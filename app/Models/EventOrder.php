@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class EventOrder extends Model
 {
+    protected $table = 'event_order';
     protected $fillable = [
         'student_id',
         'event_id',
