@@ -6,27 +6,23 @@ use Illuminate\Database\Eloquent\Model;
 
 class Event extends Model
 {
+    protected $table = 'event'; // Явно указываем имя таблицы
+    protected $primaryKey = 'event_id'; // Указываем правильный первичный ключ
 
-    protected $fillable = [
-        'title',
-        'order_id',
-        'location',
-        'description',
-        'manager_id',
-    ];
+    protected $fillable = ['title', 'location', 'description'];
 
-    public function order()
+    public function orders()
     {
-        return $this->belongsTo(Order::class);
+        return $this->belongsTo(Order::class, 'order_id', 'order_id');
     }
 
     public function manager()
     {
-        return $this->belongsTo(User::class, 'manager_id');
+        return $this->belongsTo(User::class, 'manager_id', 'user_id');
     }
 
     public function eventOrders()
     {
-        return $this->hasMany(EventOrder::class);
+        return $this->hasMany(EventOrder::class, 'event_id', 'event_id');
     }
 }

@@ -14,18 +14,13 @@ class PersonalData extends Model
         'date_of_birth',
     ];
 
-    public function users()
+    public function user()
     {
-        return $this->hasMany(User::class);
+        return $this->hasOne(User::class, 'id_personal_data', 'personal_data_id');
     }
 
-    public function students()
+    public function student()
     {
-        return $this->hasMany(Student::class, 'id_personal_data');
-    }
-
-    public function personalDataStudent()
-    {
-        return $this->hasOne(PersonalDataStudent::class, 'personal_data_student_id');
+        return $this->hasOne(Student::class, 'id_personal_data', 'personal_data_id');
     }
 }

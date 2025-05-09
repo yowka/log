@@ -42,29 +42,30 @@
         </div>
 
         <div class="card">
-            <h2>Ближайшие мероприятия</h2>
+            <h2>Последние мероприятия</h2>
             <table>
                 <thead>
                 <tr>
                     <th>Название</th>
                     <th>Дата</th>
                     <th>Место</th>
-                    <th>Действия</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>Научная конференция</td>
-                    <td>10 июня 2023</td>
-                    <td>Конференц-зал</td>
-                    <td><button class="btn btn-primary">Отметить посещаемость</button></td>
-                </tr>
-                <tr>
-                    <td>Спортивные соревнования</td>
-                    <td>15 июня 2023</td>
-                    <td>Спортивный зал</td>
-                    <td><button class="btn btn-primary">Отметить посещаемость</button></td>
-                </tr>
+                @forelse($events as $event)
+                    <tr>
+                        <td>{{ $event->title }}</td>
+                        <td>
+                            {{ $event->orders->date }}
+                        </td>
+                        <td>{{ $event->location }}</td>
+                    </tr>
+                @empty
+                    <tr>
+                        <td colspan="3" class="text-center">Нет мероприятий</td>
+                    </tr>
+                @endforelse
+
                 </tbody>
             </table>
         </div>

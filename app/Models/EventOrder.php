@@ -15,16 +15,16 @@ class EventOrder extends Model
 
     public function student()
     {
-        return $this->belongsTo(Student::class);
+        return $this->belongsTo(Student::class, 'student_id', 'id_students');
     }
 
     public function event()
     {
-        return $this->belongsTo(Event::class);
+        return $this->belongsTo(Event::class, 'event_id', 'event_id');
     }
 
     public function curator()
     {
-        return $this->belongsTo(User::class, 'curator_id');
+        return $this->belongsTo(User::class, 'curator_id', 'user_id');
     }
 }

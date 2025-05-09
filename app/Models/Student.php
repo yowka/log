@@ -14,21 +14,21 @@ class Student extends Model
 
     public function personalData()
     {
-        return $this->belongsTo(PersonalData::class, 'id_personal_data');
+        return $this->belongsTo(PersonalData::class, 'id_personal_data', 'personal_data_id');
     }
 
-    public function personalDataStudent()
+    public function studentData()
     {
-        return $this->belongsTo(PersonalDataStudent::class, 'id_personal_data_student');
+        return $this->belongsTo(PersonalDataStudent::class, 'id_personal_data_student', 'personal_data_student_id');
     }
 
     public function group()
     {
-        return $this->belongsTo(Groupa::class, 'id_group');
+        return $this->belongsTo(Groupa::class, 'id_group', 'group_id');
     }
 
     public function eventOrders()
     {
-        return $this->hasMany(EventOrder::class);
+        return $this->hasMany(EventOrder::class, 'student_id', 'id_students');
     }
 }
