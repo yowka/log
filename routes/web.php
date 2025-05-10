@@ -14,4 +14,7 @@ Route::get('/general', function () {
 })->middleware('auth');
 
 
-Route::get('/general', [LeaderController::class, 'index'])->name('leader');
+Route::get('/main', [LeaderController::class, 'index'])->name('main');
+Route::get('/group', [LeaderController::class, 'group'])->name('group');
+Route::get('/events', [LeaderController::class, 'events'])->name('events');
+Route::get('/attendance', [LeaderController::class, 'attendances'])->name('attendance');

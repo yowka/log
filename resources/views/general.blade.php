@@ -1,12 +1,11 @@
 @php use Illuminate\Support\Facades\Auth; @endphp
-<!doctype html>
+    <!doctype html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="{{asset('/public/styles/general.css')}}">
     <title>Главная страница</title>
 </head>
 <body>
@@ -17,9 +16,9 @@
         @endphp
 
         @if ($role === 'староста')
-            @include('components.leader')
+            @include('main')
         @elseif ($role === 'куратор')
-            @include('components.curator')
+            @include('curator')
         @else
             <p>Добро пожаловать!</p>
         @endif

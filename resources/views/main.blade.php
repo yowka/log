@@ -8,30 +8,7 @@
 </head>
 <body>
 <div class="wrapper">
-    <aside>
-        <div class="user-info">
-            @foreach($leaders as $leader)
-            <h3>
-                    {{ $leader->personalData->surname }}
-                    {{ $leader->personalData->name }}
-            </h3>
-                @if ($leader->group)
-                    <p>Староста группы {{ $leader->group->name }}</p>
-                @else
-                    <p>Группа не назначена</p>
-                @endif
-            @endforeach
-        </div>
-        <nav>
-            <ul>
-                <li><a href="#" class="active">Главная</a></li>
-                <li><a href="#">Моя группа</a></li>
-                <li><a href="#">Мероприятия</a></li>
-                <li><a href="#">Посещаемость</a></li>
-                <li><a href="/logout">Выход</a></li>
-            </ul>
-        </nav>
-    </aside>
+    @include('components.navigate')
     <article>
         <div class="header">
             <h1 class="page-title">Главная</h1>
@@ -89,7 +66,7 @@
                             {{$attendance->student->personalData->name}}
                         </td>
                         <td>{{ $attendance->event->title }}</td>
-                        <td>{{ $attendance->student->group->name}}</td>
+                        <td>{{ $attendance->student->groupa->name}}</td>
                         <td>
                             @if($attendance->is_attended)
                                 <span class="attendance-present">Присутствовал</span>

@@ -22,7 +22,7 @@ class Student extends Model
         return $this->belongsTo(PersonalDataStudent::class, 'id_personal_data_student', 'personal_data_student_id');
     }
 
-    public function group()
+    public function groupa()
     {
         return $this->belongsTo(Groupa::class, 'id_group', 'group_id');
     }

@@ -17,10 +17,12 @@ class Groupa extends Model
     public function starosta()
     {
         return $this->belongsTo(User::class, 'id_user', 'user_id');
+
     }
 
     public function students()
     {
-        return $this->hasMany(Student::class, 'id_group');
+        return $this->hasMany(Student::class, 'id_group', 'group_id');
+
     }
 }
