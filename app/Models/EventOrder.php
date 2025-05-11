@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class EventOrder extends Model
 {
+    protected $primaryKey = 'event_order_id';
     protected $table = 'event_order';
     protected $fillable = [
         'student_id',
@@ -24,7 +25,7 @@ class EventOrder extends Model
         return $this->belongsTo(Event::class, 'event_id', 'event_id');
     }
 
-    public function curator()
+    public function user()
     {
         return $this->belongsTo(User::class, 'curator_id', 'user_id');
     }

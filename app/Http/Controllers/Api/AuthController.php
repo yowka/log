@@ -38,7 +38,7 @@ class AuthController
 
         $request->session()->regenerate();
 
-        return redirect()->intended('/general');
+        return redirect()->intended('/main');
     }
 
 

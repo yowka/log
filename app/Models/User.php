@@ -41,4 +41,8 @@ class User extends Authenticatable
     {
         return $this->hasOne(Groupa::class, 'id_user', 'user_id');
     }
+    public function managedEvents()
+    {
+        return $this->hasMany(Event::class, 'manager_id', 'user_id');
+    }
 }

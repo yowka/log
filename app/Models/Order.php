@@ -6,8 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
 {
-    protected $table = 'orders'; // Явно указываем имя таблицы
-    protected $primaryKey = 'order_id'; // Укажите правильный первичный ключ
+    protected $table = 'orders';
+    protected $primaryKey = 'order_id';
 
     protected $fillable = ['event_id', 'order_date', 'order_time', 'details'];
 
