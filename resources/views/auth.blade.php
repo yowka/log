@@ -12,7 +12,7 @@
 <div class="container">
     <h1>Авторизация пользователя</h1>
     @if(session('error'))
-        <div style="color: red;">{{ session('error') }}</div>
+        <div>{{ session('error') }}</div>
     @endif
 
     <form method="POST" action="{{ route('login') }}">

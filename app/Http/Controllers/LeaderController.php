@@ -52,12 +52,12 @@ class LeaderController extends Controller
 
         return view('events', compact('events', 'leaders'));
     }
-
     public function attendances()
     {
         $leaders = $this->getLeaders();
-        $attendances = EventOrder::with('student', 'event')->get();
+        $attendances = EventOrder::all(); // или с with(), если есть связи
 
         return view('attendance', compact('attendances', 'leaders'));
     }
+
 }

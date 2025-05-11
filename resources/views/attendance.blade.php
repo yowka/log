@@ -5,7 +5,6 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="{{asset('/public/styles/attendance.css')}}">
     <link rel="stylesheet" href="{{asset('/public/styles/group.css')}}">
     <title>Document</title>
 </head>
@@ -18,7 +17,8 @@
             <div class="date">Сегодня, {{ date("j F Y H:i") }}</div>
         </div>
 
-        <form id="attendanceForm">
+        <form id="attendanceForm" action="{{ route('update') }}" method="POST">
+            @csrf
             <table class="table">
                 <thead>
                 <tr>
@@ -45,17 +45,16 @@
                             {{ $attendance->user->personalData->patronomic }}
                         </td>
                         <td class="checkbox-container">
-                            <input type="checkbox"
-                                   class="checkbox-lg attendance-checkbox"
-                                   data-id="{{ $attendance->event_order_id }}"
+                            <input type="checkbox" class="checkbox-lg"
+                                   name="attendance[{{ $attendance->event_order_id }}]"
+                                   value="1"
                                    @if($attendance->is_attended) checked @endif>
                         </td>
                     </tr>
                 @endforeach
                 </tbody>
             </table>
-            <button type="button" id="saveBtn" class="btn-save">Сохранить изменения</button>
-            <div id="statusMessage" class="status-message"></div>
+            <button type="submit" id="saveBtn" class="btn-save">Сохранить изменения</button>
         </form>
     </article>
 </div>

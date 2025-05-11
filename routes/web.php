@@ -1,5 +1,6 @@
 <?php
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\LeaderController;
 use Illuminate\Support\Facades\Route;
 
@@ -18,3 +19,5 @@ Route::get('/main', [LeaderController::class, 'index'])->name('main');
 Route::get('/group', [LeaderController::class, 'group'])->name('group');
 Route::get('/events', [LeaderController::class, 'events'])->name('events');
 Route::get('/attendance', [LeaderController::class, 'attendances'])->name('attendance');
+
+Route::post('/attendance', [AttendanceController::class, 'update'])->name('update');

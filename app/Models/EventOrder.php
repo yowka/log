@@ -8,6 +8,8 @@ class EventOrder extends Model
 {
     protected $primaryKey = 'event_order_id';
     protected $table = 'event_order';
+    public $timestamps = false;
+
     protected $fillable = [
         'student_id',
         'event_id',
