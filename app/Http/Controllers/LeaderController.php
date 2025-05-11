@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Event;
 use App\Models\EventOrder;
+use App\Models\Groupa;
 use App\Models\Student;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -32,10 +33,16 @@ class LeaderController extends Controller
 
     public function group()
     {
+        $userId = auth()->id();
         $leaders = $this->getLeaders();
-        $students = Student::where('id_group')->get();
 
-        return view('group', compact('students', 'leaders'));
+        $group = Groupa::where('id_user', $userId)->first();
+
+        $students = Student::with('personalData')
+            ->where('id_group', $group->group_id)
+            ->get();
+
+        return view('group', compact('students', 'group', 'leaders'));
     }
 
     public function events()

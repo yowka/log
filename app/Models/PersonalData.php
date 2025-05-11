@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class PersonalData extends Model
 {
+    protected $primaryKey = 'personal_data_id';
     protected $fillable = [
         'surname',
         'name',

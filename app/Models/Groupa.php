@@ -14,6 +14,10 @@ class Groupa extends Model
         'id_user',
     ];
 
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'id_user');
+    }
     public function starosta()
     {
         return $this->belongsTo(User::class, 'id_user', 'user_id');

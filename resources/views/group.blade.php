@@ -10,6 +10,39 @@
 <body>
 <div class="wrapper">
     @include('components.navigate')
+    <article>
+        <h2>Моя группа</h2>
+            <table>
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>ФИО</th>
+                    <th>Телефон</th>
+                    <th>Дата рождения</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach($students as $student)
+                    <tr>
+                        <td>{{ $student->id_students ?? 'N/A' }}</td>
+                        <td>
+                            {{ $student->personalData->surname }}
+                            {{ $student->personalData->name }}
+                            {{ $student->personalData->patronomic }}
+                        </td>
+                        <td>{{ $student->personalData->telephone }}</td>
+                        <td>
+                            @if(isset($student->personalData->date_of_birth))
+                                {{ \Carbon\Carbon::parse($student->personalData->date_of_birth)->format('d.m.Y') }}
+                            @else
+                                N/A
+                            @endif
+                        </td>
+                    </tr>
+                @endforeach
+                </tbody>
+            </table>
+    </article>
 </div>
 </body>
 </html>
