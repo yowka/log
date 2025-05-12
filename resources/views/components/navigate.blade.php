@@ -9,13 +9,17 @@
             @if ($leader->group)
                 <p>Староста группы {{ $leader->group->name}}</p>
             @else
-                <p>Группа не назначена</p>
+                <p>Куратор</p>
             @endif
         @endforeach
     </div>
     <nav>
         <ul>
-            <li><a href="{{route('main')}}" class="active">Главная</a></li>
+            <li>
+                <a href="{{ auth()->user()->role->name === 'куратор' ? route('curator') : route('starosta') }}" class="active">
+                    Главная
+                </a>
+            </li>
             <li><a href="{{route('group')}}">Моя группа</a></li>
             <li><a href="{{route('events')}}">Мероприятия</a></li>
             <li><a href="{{route('attendance')}}">Посещаемость</a></li>

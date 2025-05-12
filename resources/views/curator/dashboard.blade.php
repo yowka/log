@@ -8,15 +8,15 @@
     <title>Куратор</title>
 </head>
 <body>
-<aside>
-    <nav>
-        <ul>
-            <li><a href="/">Главная</a></li>
-            <li><a href="/">Студенты</a></li>
-            <li><a href="/">Мероприятия</a></li>
-            <li><a href="/">Отчеты</a></li>
-        </ul>
-    </nav>
-</aside>
+<div class="wrapper">
+    @include('components.navigate')
+    <article>
+        <div class="header">
+            <h1 class="page-title">Главная</h1>
+            <?php date_default_timezone_set('Asia/Tomsk'); ?>
+            <div class="date">Сегодня, {{ date("j F Y H:i") }}</div>
+        </div>
+    </article>
+</div>
 </body>
 </html>

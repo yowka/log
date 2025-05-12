@@ -21,24 +21,24 @@ class AuthController
             'password' => 'required|string',
         ]);
 
-        $user = User::where('login', $credentials['login'])->first();
-
-        if (!$user || !Hash::check($credentials['password'], $user->password)) {
-            return back()->withErrors([
-                'login' => 'Неверные учетные данные',
+        if (!Auth::attempt($credentials)) {
+            throw ValidationException::withMessages([
+                'login' => ['Неверные учётные данные'],
             ]);
         }
 
-        $token = Str::random(60);
-        $user->api_token = $token;
-        $user->save();
+        $user = Auth::user();
 
-        // Логиним пользователя
-        Auth::login($user);
+        $roleName = $user->role->name;
 
-        $request->session()->regenerate();
-
-        return redirect()->intended('/main');
+        switch ($roleName) {
+            case 'куратор':
+                return redirect()->route('curator');
+            case 'староста':
+                return redirect()->route('starosta');
+            default:
+                return redirect('/login');
+        }
     }
 
 
@@ -47,9 +47,12 @@ class AuthController
         $user = $request->user();
         $user->api_token = null;
         $user->save();
-        response()->json([
-            'message' => 'Выход выполнен успешно'
-        ], 200);
-        return redirect()->intended('/login');
+
+        Auth::logout();
+
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect('/login');
     }
 }

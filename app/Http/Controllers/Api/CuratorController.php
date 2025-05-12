@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
 use App\Models\Event;
 use App\Models\EventOrder;
@@ -8,16 +8,13 @@ use App\Models\Groupa;
 use App\Models\Student;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Routing\Controller;
-use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\Auth;
 
-class LeaderController extends Controller
+class CuratorController
 {
     private function getLeaders()
     {
         return User::whereHas('role', function ($query) {
-            $query->where('name', 'староста');
+            $query->where('name', 'куратор');
         })->with(['personalData', 'group'])->get();
 
     }
@@ -27,13 +24,12 @@ class LeaderController extends Controller
         $events = Event::take(5)->get();
         $attendances = EventOrder::take(5)->get();
 
-        return view('starosta.dashboard',compact('leaders', 'events', 'attendances'));
+        return view('curator.dashboard',compact('leaders', 'events', 'attendances'));
     }
 
     public function group()
     {
         $userId = auth()->id();
-        $leaders = $this->getLeaders();
 
         $group = Groupa::where('id_user', $userId)->first();
 
@@ -41,21 +37,19 @@ class LeaderController extends Controller
             ->where('id_group', $group->group_id)
             ->get();
 
-        return view('starosta.group', compact('students', 'group', 'leaders'));
+        return view('curator.group', compact('students', 'group'));
     }
 
     public function events()
     {
-        $leaders = $this->getLeaders();
         $events = Event::with('orders')->get();
 
-        return view('starosta.events', compact('events', 'leaders'));
+        return view('curator.events', compact('events'));
     }
     public function attendances()
     {
-        $leaders = $this->getLeaders();
         $attendances = EventOrder::all();
 
-        return view('starosta.attendance', compact('attendances', 'leaders'));
+        return view('curator.attendance', compact('attendances'));
     }
 }
