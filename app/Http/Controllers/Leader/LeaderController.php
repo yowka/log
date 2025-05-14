@@ -1,16 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Leader;
 
 use App\Models\Event;
 use App\Models\EventOrder;
 use App\Models\Groupa;
 use App\Models\Student;
 use App\Models\User;
-use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\Auth;
 
 class LeaderController extends Controller
 {

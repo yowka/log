@@ -17,7 +17,7 @@
             <div class="date">Сегодня, {{ date("j F Y H:i") }}</div>
         </div>
 
-        <form id="attendanceForm" action="{{ route('update') }}" method="POST">
+        <form id="attendanceForm" action="{{ route('starosta.update') }}" method="POST">
             @csrf
             <table class="table">
                 <thead>

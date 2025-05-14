@@ -1,12 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\Api\Auth;
 
-use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
 
 class AuthController
@@ -33,9 +30,9 @@ class AuthController
 
         switch ($roleName) {
             case 'куратор':
-                return redirect()->route('curator');
+                return redirect()->route('api.curator.main');
             case 'староста':
-                return redirect()->route('starosta');
+                return redirect()->route('starosta.main');
             default:
                 return redirect('/login');
         }

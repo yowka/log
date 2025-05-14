@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Leader;
 
 use App\Models\EventOrder;
 use Illuminate\Http\Request;
@@ -13,7 +13,6 @@ class AttendanceController
         return view('attendance', compact('attendances'));
     }
 
-    // Сохраняем изменения
     public function update(Request $request)
     {
         $attendanceData = $request->input('attendance', []);

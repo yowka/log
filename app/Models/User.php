@@ -26,7 +26,15 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
     ];
+    public function isCurator()
+    {
+        return $this->role && $this->role->name === 'куратор';
+    }
 
+    public function isStarosta()
+    {
+        return $this->role && $this->role->name === 'староста';
+    }
     public function role()
     {
         return $this->belongsTo(Role::class, 'id_role');
