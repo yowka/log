@@ -11,21 +11,21 @@ use Illuminate\Routing\Controller;
 
 class LeaderController extends Controller
 {
-    private function getLeaders()
-    {
-        return User::whereHas('role', function ($query) {
-            $query->where('name', 'староста');
-        })->with(['personalData', 'group'])->get();
+        private function getLeaders()
+        {
+            return User::whereHas('role', function ($query) {
+                $query->where('name', 'староста');
+            })->with(['personalData', 'group'])->get();
 
-    }
+        }
 
-    public function index(){
-        $leaders = $this->getLeaders();
-        $events = Event::take(5)->get();
-        $attendances = EventOrder::take(5)->get();
+        public function index(){
+            $leaders = $this->getLeaders();
+            $events = Event::take(5)->get();
+            $attendances = EventOrder::take(5)->get();
 
-        return view('starosta.dashboard',compact('leaders', 'events', 'attendances'));
-    }
+            return view('starosta.dashboard',compact('leaders', 'events', 'attendances'));
+        }
 
     public function group()
     {

@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api\Curator;
 
 use App\Models\EventOrder;
 
-class AttendanceController
+class EventOrderController
 {
 
     public function index()

@@ -30,7 +30,7 @@ class AuthController
 
         switch ($roleName) {
             case 'куратор':
-                return redirect()->route('api.curator.main');
+                return redirect()->route('curator.main');
             case 'староста':
                 return redirect()->route('starosta.main');
             default:

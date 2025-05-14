@@ -1,5 +1,5 @@
 <link rel="stylesheet" href="{{ asset('styles/general.css') }}">
-
+<link rel="icon" href="{{ asset('book.ico') }}">
 <aside>
     <div class="user-info">
         @php($user = auth()->user())
@@ -21,15 +21,15 @@
     <nav>
         <ul>
             <li>
-                <a href="{{ $user->isCurator() ? route('api.curator.main') : route('starosta.main') }}" class="active">
+                <a href="{{ $user->isCurator() ? route('curator.main') : route('starosta.main') }}" class="active">
                     Главная
                 </a>
             </li>
 
             @if($user->isCurator())
-                <li><a href="{{ route('api.curator.groups') }}">Мои группы</a></li>
-                <li><a href="{{ route('api.curator.events') }}">Мероприятия</a></li>
-                <li><a href="{{ route('api.curator.attendance') }}">Посещаемость</a></li>
+                <li><a href="{{ route('curator.groups') }}">Мои группы</a></li>
+                <li><a href="{{ route('curator.events') }}">Мероприятия</a></li>
+                <li><a href="{{ route('curator.attendance') }}">Посещаемость</a></li>
             @else
                 <li><a href="{{ route('starosta.group') }}">Моя группа</a></li>
                 <li><a href="{{ route('starosta.events') }}">Мероприятия</a></li>

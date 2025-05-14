@@ -23,10 +23,12 @@ class Groupa extends Model
         return $this->belongsTo(User::class, 'id_user', 'user_id');
 
     }
-
+    public function curator()
+    {
+        return $this->belongsTo(User::class, 'id_user');
+    }
     public function students()
     {
-        return $this->hasMany(Student::class, 'id_group', 'group_id');
-
+        return $this->hasMany(User::class, 'group_id');
     }
 }
