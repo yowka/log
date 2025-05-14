@@ -31,10 +31,7 @@ class User extends Authenticatable
         return $this->role && $this->role->name === 'куратор';
     }
 
-    public function isStarosta()
-    {
-        return $this->role && $this->role->name === 'староста';
-    }
+
     public function role()
     {
         return $this->belongsTo(Role::class, 'id_role');
@@ -45,16 +42,9 @@ class User extends Authenticatable
         return $this->belongsTo(PersonalData::class, 'id_personal_data', 'personal_data_id');
     }
 
-    public function group()
+    public function groupa()
     {
-            return $this->hasOne(Groupa::class, 'id_user', 'user_id');
+        return $this->hasOne(Groupa::class, 'id_user', 'user_id');
     }
-    public function groups()
-    {
-        return $this->hasMany(Groupa::class, 'id_user');
-    }
-    public function managedEvents()
-    {
-        return $this->hasMany(Event::class, 'manager_id', 'user_id');
-    }
+
 }

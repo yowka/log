@@ -13,9 +13,10 @@ class CuratorController
 {
     private function getLeaders()
     {
-        return User::whereHas('role', function ($query) {
-            $query->where('name', 'куратор');
-        })->with(['personalData', 'group'])->get();
+        return User::with(['personalData', 'groupa'])
+            ->whereHas('role', function ($query) {
+                $query->where('name', 'куратор');
+            })->get();
     }
 
     /**
@@ -25,25 +26,28 @@ class CuratorController
     {
         $userId = auth()->id();
 
-        // Получаем всех кураторов
+        // Кураторы
         $leaders = $this->getLeaders();
 
-        // Получаем последние 5 мероприятий
+        // Мероприятия
         $events = Event::take(5)->get();
 
-        // Получаем посещения, связанные с текущим куратором
+        // Посещения
         $attendances = EventOrder::with(['student.personalData', 'event'])
             ->where('curator_id', $userId)
             ->take(5)
             ->get();
-        $group = Groupa::where('id_user', $userId)->first();
 
+        // Получаем ID групп текущего куратора
+        $groupIds = Groupa::where('id_user', $userId)->pluck('group_id');
+
+        // Получаем студентов только из этих групп
         $students = Student::with('personalData')
-            ->where('id_group', $group->group_id)
+            ->whereIn('id_group', $groupIds)
             ->get();
 
-//        return response()->json(['leaders' => $leaders, 'events' => $events, 'attendances' => $attendances, 'group' => $group]);
         return view('curator.dashboard', compact('leaders', 'events', 'attendances', 'students'));
+//        return response()->json(['leaders' => $leaders, 'events' => $events, 'attendances' => $attendances, 'group' => $group]);
     }
 
 }

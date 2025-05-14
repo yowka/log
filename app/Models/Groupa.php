@@ -29,6 +29,6 @@ class Groupa extends Model
     }
     public function students()
     {
-        return $this->hasMany(User::class, 'group_id');
+        return $this->hasMany(Student::class, 'id_group', 'group_id');
     }
 }

@@ -38,14 +38,43 @@
                             {{ $leader->personalData->name }}
                             {{ $leader->personalData->patronomic ?? '' }}
                         </td>
-                        <td>{{ $leader->group ? $leader->group->name : '-' }}</td>
+                        <td>{{ $leader->groupa?->name}}</td>
                         <td>{{ $leader->personalData->telephone }}</td>
                     </tr>
                 @endforeach
                 </tbody>
             </table>
         </div>
+        <div class="card">
+            <h2>Студенты</h2>
+            <table>
+                <thead>
+                <tr>
+                    <th>ID студента</th>
+                    <th>ФИО</th>
+                    <th>Группа студента</th>
+                    <th>Дата рождения</th>
+                    <th>Телефон</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach($students as $student)
+                    <tr>
+                        <td>{{ $student->id_students }}</td>
+                        <td>
+                            {{ $student->personalData->surname }}
+                            {{ $student->personalData->name }}
+                            {{ $student->personalData->patronomic ?? '' }}
+                        </td>
+                        <td>{{ $student->groupa?->name}}</td>
+                        <td>{{ \Carbon\Carbon::parse($student->personalData->date_of_birth)->format('d.m.Y') }}</td>
+                        <td>{{ $student->personalData->telephone }}</td>
+                    </tr>
 
+                @endforeach
+                </tbody>
+            </table>
+        </div>
         <div class="card">
 
             <h2>Мероприятия</h2>
@@ -78,12 +107,14 @@
                     <th>ID студента</th>
                     <th>ФИО студента</th>
                     <th>Мероприятие</th>
+                    <th>Группа</th>
                     <th>Посещение</th>
                 </tr>
                 </thead>
                 <tbody>
                 @foreach($attendances as $attendance)
                     <tr>
+                        <td>{{ $attendance->student->id_students }}</td>
                         <td>
                             {{$attendance->student->personalData->surname}}
                             {{$attendance->student->personalData->name}}
@@ -103,36 +134,7 @@
                 </tbody>
             </table>
         </div>
-        <div class="card">
-            <h2>Студенты</h2>
-            <table>
-                <thead>
-                <tr>
-                    <th>ID студента</th>
-                    <th>ФИО</th>
-                    <th>Дата рождения</th>
-                    <th>Телефон</th>
-                </tr>
-                </thead>
-                <tbody>
-                @foreach($students as $student)
-                    <tr>
-                        <td>{{ $student->student_id }}</td>
-                        <td>
-                            {{ $student->personalData->surname }}
-                            {{ $student->personalData->name }}
-                            {{ $student->personalData->patronomic ?? '' }}
-                        </td>
-                        <td>{{ \Carbon\Carbon::parse($student->personalData->date_of_birth)->format('d.m.Y') }}</td>
-                        <td>{{ $student->personalData->telephone }}</td>
-                    </tr>
-                    <tr>
-                        <td colspan="4">Нет студентов в группе</td>
-                    </tr>
-                @endforeach
-                </tbody>
-            </table>
-        </div>
+
     </article>
 </div>
 </body>
