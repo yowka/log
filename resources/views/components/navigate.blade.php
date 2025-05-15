@@ -49,17 +49,17 @@
                 </li>
             @else
                 <li>
-                    <a href="{{ route('starosta.group') }}" class="{{ request()->routeIs('starosta.group.show') ? 'active' : '' }}">
+                    <a href="{{ route('starosta.group') }}" class="{{ request()->routeIs('starosta.group') ? 'active' : '' }}">
                         Моя группа
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('starosta.events.index') }}" class="{{ request()->routeIs('starosta.events.index') ? 'active' : '' }}">
+                    <a href="{{ route('starosta.events') }}" class="{{ request()->routeIs('starosta.events') ? 'active' : '' }}">
                         Мероприятия
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('starosta.attendance.index') }}" class="{{ request()->routeIs('starosta.attendance.*') ? 'active' : '' }}">
+                    <a href="{{ route('starosta.attendance') }}" class="{{ request()->routeIs('starosta.*') ? 'active' : '' }}">
                         Посещаемость
                     </a>
                 </li>

@@ -17,7 +17,7 @@ class Student extends Model
 
     public function personalData()
     {
-        return $this->belongsTo(PersonalData::class, 'id_personal_data', 'personal_data_id');
+        return $this->belongsTo(PersonalData::class, 'id_personal_data');
     }
 
     public function studentData()

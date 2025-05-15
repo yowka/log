@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Список студентов</title>
-    <link rel="stylesheet" href="{{ asset('styles/general.css') }}">
+    <link rel="stylesheet" href="{{ asset('styles/group.css') }}">
 </head>
 <body>
 <div class="wrapper">
@@ -28,6 +28,7 @@
                 <table class="students__table">
                     <thead class="students__table-head">
                     <tr class="students__table-row">
+                        <th class="students__table-header">Id</th>
                         <th class="students__table-header">ФИО</th>
                         <th class="students__table-header">Группа</th>
                         <th class="students__table-header">Телефон</th>
@@ -37,6 +38,7 @@
                     <tbody class="students__table-body">
                     @forelse($students as $student)
                         <tr class="students__table-row">
+                            <td class="students__table-cell">{{ $student->groupa->group_id}}</td>
                             <td class="students__table-cell">
                                 {{ $student->personalData->surname ?? '' }}
                                 {{ $student->personalData->name ?? '' }}

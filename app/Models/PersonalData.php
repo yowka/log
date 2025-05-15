@@ -24,6 +24,6 @@ class PersonalData extends Model
 
     public function student()
     {
-        return $this->hasOne(Student::class, 'id_personal_data', 'personal_data_id');
+        return $this->hasOne(Student::class, 'id_personal_data');
     }
 }

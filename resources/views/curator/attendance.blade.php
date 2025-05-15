@@ -46,7 +46,8 @@
                             {{ $attendance->user->personalData->patronomic }}
                         </td>
                         <td class="checkbox-container">
-                            <input type="checkbox" class="  checkbox-lg"
+                            <input type="hidden" name="attendance[{{ $attendance->event_order_id }}]" value="0">
+                            <input type="checkbox" class="checkbox-lg"
                                    name="attendance[{{ $attendance->event_order_id }}]"
                                    value="1"
                                    @if($attendance->is_attended) checked @endif>

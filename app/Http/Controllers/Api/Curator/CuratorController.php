@@ -32,7 +32,7 @@ class CuratorController
             ->whereIn('id_group', $groupIds)
             ->get();
 
-//        return response()->json(['leaders' => $leaders, 'events' => $events, 'attendances' => $attendances, 'group' => $group]);
+//        return response()->json(['leaders' => $leaders, 'events' => $events, 'attendances' => $attendances]);
         return view('curator.dashboard', compact('leaders', 'events', 'attendances', 'students'));
     }
 

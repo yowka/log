@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\Curator;
 
 use App\Models\Event;
+use Exception;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Request;
 

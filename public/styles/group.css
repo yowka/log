@@ -1,6 +1,6 @@
 .wrapper {
     width: 100%;
-    max-width: 1200px;
+    max-width: 1500px;
     margin: 0 auto;
     padding: 20px;
 }
@@ -129,4 +129,9 @@
     display: flex;
     justify-content: center;
     margin-top: 20px;
+}
+.checkbox-container{
+    input{
+        zoom: 1.6;
+    }
 }

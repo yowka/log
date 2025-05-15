@@ -14,8 +14,11 @@ class GroupController
     public function index()
     {
         $userId = Auth::id();
+
         $groups = Groupa::where('id_user', $userId)->with('students')->get();
-        return response()->json($groups);
+        $students = $groups->pluck('students')->flatten();
+
+        return view('curator.group', compact('groups', 'students'));
     }
 
     public function show($id)

@@ -53,23 +53,33 @@ class StudentController
             'patronomic' => 'nullable|string|max:255',
             'telephone' => 'required|string|max:20',
             'date_of_birth' => 'required|date',
-            'group_id' => 'required|exists:groupa,group_id', // Используем правильное имя таблицы
+            'group_id' => 'required|exists:groupa,group_id',
         ]);
 
-        // Создаем запись в personal_data
+        // Создаем персональные данные
         $personalData = PersonalData::create([
-            'surname' => $request->surname,
-            'name' => $request->name,
-            'patronomic' => $request->patronomic,
-            'telephone' => $request->telephone,
-            'date_of_birth' => $request->date_of_birth,
+            'surname' => $validated['surname'],
+            'name' => $validated['name'],
+            'patronomic' => $validated['patronomic'] ?? null,
+            'telephone' => $validated['telephone'],
+            'date_of_birth' => $validated['date_of_birth'],
         ]);
 
-// Создаем студента с id из personal_data
-        Student::create([
+        if (!$personalData || !$personalData->id) {
+            return back()->withErrors(['error' => 'Не удалось сохранить персональные данные']);
+        }
+
+        // Создаем студента
+        $student = Student::create([
             'id_personal_data' => $personalData->id,
-            'id_group' => $request->group_id,
+            'id_group' => $validated['group_id'],
         ]);
+
+        if (!$student) {
+            // Удаляем созданные персональные данные, если не удалось создать студента
+            $personalData->delete();
+            return back()->withErrors(['error' => 'Не удалось сохранить данные студента']);
+        }
 
         return redirect()->route('curator.students.index')->with('success', 'Студент успешно добавлен');
     }
