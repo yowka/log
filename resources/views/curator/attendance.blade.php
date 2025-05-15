@@ -18,8 +18,7 @@
             <h1 class="page-title">Посещаемость</h1>
             <div class="date">Сегодня, {{ date("j F Y H:i") }}</div>
         </div>
-
-        <form id="attendanceForm" action="{{ route('update') }}" method="POST">
+        <form id="attendanceForm" action="{{ route('curator.attendance.update') }}" method="POST">
             @csrf
             <table class="table">
                 <thead>

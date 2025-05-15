@@ -30,10 +30,25 @@ Route::middleware(['auth'])->prefix('starosta')->as('starosta.')->group(function
 
 Route::middleware('auth')->prefix('curator')->as('curator.')->group(function () {
     Route::get('/main', [CuratorController::class, 'index'])->name('main');
+
+    // Группы
     Route::get('/groups', [GroupController::class, 'index'])->name('groups');
     Route::get('/group/{group}/students', [GroupController::class, 'students'])->name('group');
-    Route::get('/students', [StudentController::class, 'index'])->name('students');
+
+    // Студенты
+    Route::get('/students', [StudentController::class, 'index'])->name('students.index');
+    Route::get('/students/create', [StudentController::class, 'create'])->name('students.create');
+    Route::post('/students', [StudentController::class, 'store'])->name('students.store');
+    Route::get('/students/{id_students}/edit', [StudentController::class, 'edit'])->name('students.edit');
+    Route::put('/students/{id_students}', [StudentController::class, 'update'])->name('students.update');
+    Route::delete('/students/{id_students   }', [StudentController::class, 'destroy'])->name('students.destroy');
+
+    // События
     Route::get('/events', [EventsController::class, 'index'])->name('events');
     Route::post('/events', [EventsController::class, 'store'])->name('events.store');
-    Route::post('/attendance', [EventOrderController::class, 'update'])->name('attendance');
+
+    // Посещаемость
+    Route::get('/attendance', [EventOrderController::class, 'index'])->name('attendance');
+    Route::post('/attendance', [EventOrderController::class, 'update'])->name('attendance.update');
+
 });

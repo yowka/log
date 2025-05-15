@@ -7,13 +7,17 @@ use Illuminate\Database\Eloquent\Model;
 class Groupa extends Model
 {
     protected $table = 'groupa';
+    public $timestamps = false;
     protected $primaryKey = 'group_id';
     protected $fillable = [
         'name',
         'releas',
         'id_user',
     ];
-
+    public function leader()
+    {
+        return $this->belongsTo(User::class, 'id_user');
+    }
     public function user()
     {
         return $this->belongsTo(User::class, 'id_user');

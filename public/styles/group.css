@@ -1,9 +1,132 @@
-.table{
-    width: 90%;
+.wrapper {
+    width: 100%;
+    max-width: 1200px;
     margin: 0 auto;
+    padding: 20px;
 }
-.checkbox-lg {
-    zoom: 1.5;
+
+.students {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    padding: 20px;
+    margin-top: 20px;
+}
+
+.students__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.students__title {
+    color: #2c3e50;
+    margin: 0;
+}
+
+.students__add-button {
+    padding: 8px 15px;
+    background-color: #28a745;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.students__add-button:hover {
+    background-color: #218838;
+}
+
+.students__alert {
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+}
+
+.students__alert--success {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.students__table-container {
+    overflow-x: auto;
+}
+
+.students__table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.students__table-head {
+    background-color: #f8f9fa;
+}
+
+.students__table-header {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 2px solid #dee2e6;
+}
+
+.students__table-row {
+    border-bottom: 1px solid #dee2e6;
+}
+
+.students__table-row:hover {
+    background-color: #f8f9fa;
+}
+
+.students__table-cell {
+    padding: 12px 15px;
+    vertical-align: middle;
+}
+
+.students__table-cell--empty {
+    text-align: center;
+    color: #6c757d;
+    padding: 20px;
+}
+
+.students__actions {
+    display: flex;
+    gap: 10px;
+}
+
+.students__action-form {
+    margin: 0;
+}
+
+.students__action-button {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
     cursor: pointer;
-    margin: 0 auto;
+    transition: background-color 0.15s;
+}
+
+.students__action-button--edit {
+    background-color: #17a2b8;
+    color: white;
+    text-decoration: none;
+}
+
+.students__action-button--edit:hover {
+    background-color: #138496;
+}
+
+.students__action-button--delete {
+    background-color: #dc3545;
+    color: white;
+}
+
+.students__action-button--delete:hover {
+    background-color: #c82333;
+}
+
+.students__pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
 }

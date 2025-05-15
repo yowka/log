@@ -10,10 +10,10 @@ use Laravel\Sanctum\HasApiTokens;
 class User extends Authenticatable
 {
     use HasApiTokens;
-    protected $table = 'user'; // Твоя таблица в БД
-    protected $primaryKey = 'user_id'; // или другое имя вашего первичного ключа
+    protected $table = 'user'; 
+    protected $primaryKey = 'user_id';
 
-    public $timestamps = false; // Если нет created_at / updated_at
+    public $timestamps = false;
 
     protected $fillable = [
         'login',
@@ -31,7 +31,10 @@ class User extends Authenticatable
         return $this->role && $this->role->name === 'куратор';
     }
 
-
+    public function isLeader()
+    {
+        return $this->role && $this->role->name === 'староста';
+    }
     public function role()
     {
         return $this->belongsTo(Role::class, 'id_role');
@@ -42,9 +45,13 @@ class User extends Authenticatable
         return $this->belongsTo(PersonalData::class, 'id_personal_data', 'personal_data_id');
     }
 
+    public function group()
+    {
+        return $this->belongsTo(Groupa::class, 'id_group', 'group_id');
+    }
     public function groupa()
     {
-        return $this->hasOne(Groupa::class, 'id_user', 'user_id');
+        return $this->hasOne(\App\Models\Groupa::class, 'id_user', 'user_id');
     }
 
 }

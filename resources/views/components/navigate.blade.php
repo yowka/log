@@ -11,8 +11,8 @@
 
         @if ($user->isCurator())
             <p>Куратор</p>
-        @elseif ($user->group)
-            <p>Староста группы {{ $user->group->name }}</p>
+        @elseif ($user->isLeader())
+            <p>Староста группы</p>
         @else
             <p>Студент</p>
         @endif
@@ -21,23 +21,55 @@
     <nav>
         <ul>
             <li>
-                <a href="{{ $user->isCurator() ? route('curator.main') : route('starosta.main') }}" class="active">
+                <a href="{{ $user->isCurator() ? route('curator.main') : route('starosta.main') }}" class="{{ request()->routeIs('*main') ? 'active' : '' }}">
                     Главная
                 </a>
             </li>
 
             @if($user->isCurator())
-                <li><a href="{{ route('curator.groups') }}">Мои группы</a></li>
-                <li><a href="{{ route('curator.events') }}">Мероприятия</a></li>
-                <li><a href="{{ route('curator.attendance') }}">Посещаемость</a></li>
+                <li>
+                    <a href="{{ route('curator.groups') }}" class="{{ request()->routeIs('curator.groups.*') ? 'active' : '' }}">
+                        Мои группы
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('curator.students.index') }}" class="{{ request()->routeIs('curator.students.*') ? 'active' : '' }}">
+                        Студенты
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('curator.events') }}" class="{{ request()->routeIs('curator.events.*') ? 'active' : '' }}">
+                        Мероприятия
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('curator.attendance') }}" class="{{ request()->routeIs('curator.attendance.*') ? 'active' : '' }}">
+                        Посещаемость
+                    </a>
+                </li>
             @else
-                <li><a href="{{ route('starosta.group') }}">Моя группа</a></li>
-                <li><a href="{{ route('starosta.events') }}">Мероприятия</a></li>
-                <li><a href="{{ route('starosta.attendance') }}">Посещаемость</a></li>
+                <li>
+                    <a href="{{ route('starosta.group') }}" class="{{ request()->routeIs('starosta.group.show') ? 'active' : '' }}">
+                        Моя группа
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('starosta.events.index') }}" class="{{ request()->routeIs('starosta.events.index') ? 'active' : '' }}">
+                        Мероприятия
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('starosta.attendance.index') }}" class="{{ request()->routeIs('starosta.attendance.*') ? 'active' : '' }}">
+                        Посещаемость
+                    </a>
+                </li>
             @endif
 
-            <!-- Выход -->
-            <li><a href="{{ route('logout') }}">Выход</a></li>
+            <li>
+                <a href="{{ route('logout') }}" class="{{ request()->routeIs('logout') ? 'active' : '' }}">
+                    Выход
+                </a>
+            </li>
         </ul>
     </nav>
 </aside>
