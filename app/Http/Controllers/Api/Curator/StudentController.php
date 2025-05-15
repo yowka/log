@@ -56,7 +56,6 @@ class StudentController
             'group_id' => 'required|exists:groupa,group_id',
         ]);
 
-        // Создаем персональные данные
         $personalData = PersonalData::create([
             'surname' => $validated['surname'],
             'name' => $validated['name'],
@@ -69,14 +68,12 @@ class StudentController
             return back()->withErrors(['error' => 'Не удалось сохранить персональные данные']);
         }
 
-        // Создаем студента
         $student = Student::create([
             'id_personal_data' => $personalData->id,
             'id_group' => $validated['group_id'],
         ]);
 
         if (!$student) {
-            // Удаляем созданные персональные данные, если не удалось создать студента
             $personalData->delete();
             return back()->withErrors(['error' => 'Не удалось сохранить данные студента']);
         }

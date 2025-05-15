@@ -3,42 +3,68 @@
 namespace App\Http\Controllers\Api\Curator;
 
 use App\Models\Event;
+use App\Models\Order;
+use App\Models\User;
 use Exception;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Request;
-
+use Illuminate\Http\Request;
 class EventsController
 {
     public function index()
     {
-        $events = Event::with('orders')->get();
-        return response()->json($events);
+        $events = Event::with('orders', 'manager')->get();
+        return view('curator.events', compact('events'));
     }
 
+    public function create()
+    {
+        $orders = Order::all();
+        $curators = User::whereHas('role', function ($query) {
+            $query->where('name', 'куратор');
+        })->get();
+        return view('curator.event-update', compact('orders', 'curators'));
+    }
+
+    public function edit($event_id)
+    {
+        $event = Event::with('orders', 'manager')->findOrFail($event_id);
+        $orders = Order::all();
+        $curators = User::whereHas('role', function ($query) {
+            $query->where('name', 'куратор');
+        })->get();
+
+        return view('curator.event-update', compact('event', 'orders', 'curators'));
+    }
 
     public function store(Request $request)
     {
-        $event = Event::create([
-            'title' => $request->input('title'),
-            'location' => $request->input('location'),
-            'date' => $request->input('date'),
-            'curator_id' => Auth::id(),
+        $validated = $request->validate([
+            'title' => 'required|string|max:255',
+            'location' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'order_id' => 'required|exists:orders,order_id',
+            'manager_id' => 'required|exists:users,id',
         ]);
-        return response()->json($event, 201);
+
+        Event::create($validated);
+
+        return redirect()->route('curator.events.index')->with('success', 'Мероприятие создано');
     }
 
-
-    public function update(Request $request, $id)
+    public function update(Request $request, $event_id)
     {
-        $event = Event::find($id);
-        if (!$event) {
-            throw new Exception('Event not found', 404);
-        }
-        $event->update([
-            'title' => $request->input('title'),
-            'location' => $request->input('location'),
-            'date' => $request->input('date'),
+        $event = Event::findOrFail($event_id);
+
+        $validated = $request->validate([
+            'title' => 'required|string|max:255',
+            'location' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'order_id' => 'required|exists:orders,order_id',
+            'manager_id' => 'required|exists:users,id',
         ]);
-        return response()->json($event);
+
+        $event->update($validated);
+
+        return redirect()->route('curator.events.index')->with('success', 'Мероприятие обновлено');
     }
 }

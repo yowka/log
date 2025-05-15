@@ -18,7 +18,7 @@ class Event extends Model
 
     public function manager()
     {
-        return $this->belongsTo(User::class, 'manager_id', 'user_id');
+        return $this->belongsTo(User::class, 'manager_id');
     }
 
     public function eventOrders()

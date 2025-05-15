@@ -12,7 +12,3 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth');
 
 
-Route::middleware('auth:api')->prefix('curator')->as('curator.')->group(function () {
-    Route::ApiResource('/category', CategoryController::class);
-    Route::ApiResource('/product', ProductController::class);
-});

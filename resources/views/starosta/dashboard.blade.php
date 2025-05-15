@@ -64,6 +64,7 @@
                         <td>
                             {{$attendance->student->personalData->surname}}
                             {{$attendance->student->personalData->name}}
+                            {{$attendance->student->personalData->patronomic}}
                         </td>
                         <td>{{ $attendance->event->title }}</td>
                         <td>{{ $attendance->student->groupa->name}}</td>

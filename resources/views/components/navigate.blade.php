@@ -38,12 +38,12 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('curator.events') }}" class="{{ request()->routeIs('curator.events.*') ? 'active' : '' }}">
+                    <a href="{{ route('curator.events.index') }}" class="{{ request()->routeIs('curator.events.*') ? 'active' : '' }}">
                         Мероприятия
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('curator.attendance') }}" class="{{ request()->routeIs('curator.attendance.*') ? 'active' : '' }}">
+                    <a href="{{ route('curator.attendance.index') }}" class="{{ request()->routeIs('curator.attendance.*') ? 'active' : '' }}">
                         Посещаемость
                     </a>
                 </li>
@@ -66,7 +66,7 @@
             @endif
 
             <li>
-                <a href="{{ route('logout') }}" class="{{ request()->routeIs('logout') ? 'active' : '' }}">
+                <a href="{{ route('logout') }}" >
                     Выход
                 </a>
             </li>

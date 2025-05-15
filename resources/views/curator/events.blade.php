@@ -28,6 +28,7 @@
                 <th>Приказ</th>
                 <th>Дата приказа</th>
                 <th>Ответственный</th>
+                <th>Редактировать</th>
             </tr>
             </thead>
             <tbody>
@@ -37,13 +38,12 @@
                     <td>{{ $event->title }}</td>
                     <td>{{ $event->location }}</td>
                     <td>{{ $event->description }}</td>
-                    <td>
-                        {{ $event->orders->number }}
-                    </td>
-                    <td>
-                        {{ \Carbon\Carbon::parse($event->orders->date)->format('d.m.Y') }}
-                    </td>
+                    <td>{{ $event->orders->number }}</td>
+                    <td>{{ \Carbon\Carbon::parse($event->orders->date)->format('d.m.Y') }}</td>
                     <td>{{ $event->manager->login }}</td>
+                    <td>
+                        <a href="{{ route('curator.events.update', $event->event_id) }}">Редактировать</a>
+                    </td>
                 </tr>
             @endforeach
             </tbody>
